@@ -1,0 +1,175 @@
+---
+title: "Hands-on exercise 04-2: Visual Statistical Analysis"
+author: "XieHaoyang"
+format: html
+execute:
+  warning: false
+---
+
+# Visual Statistical Analysis
+
+## Getting Started
+
+### Installing and launching R packages
+
+```{r}
+pacman::p_load(ggstatsplot, tidyverse)
+```
+
+### Importing data
+
+```{r}
+exam <- read_csv("Exam_data.csv")
+```
+
+### One-sample test: gghistostats() method
+
+```{r}
+set.seed(1234)
+
+gghistostats(
+  data = exam,
+  x = ENGLISH,
+  type = "bayes",
+  test.value = 60,
+  xlab = "English scores"
+)
+```
+
+### Two-sample mean test: ggbetweenstats()
+
+```{r}
+ggbetweenstats(
+  data = exam,
+  x = GENDER, 
+  y = MATHS,
+  type = "np",
+  messages = FALSE
+)
+```
+
+### Oneway ANOVA Test: ggbetweenstats() method
+
+```{r}
+ggbetweenstats(
+  data = exam,
+  x = RACE, 
+  y = ENGLISH,
+  type = "p",
+  mean.ci = TRUE, 
+  pairwise.comparisons = TRUE, 
+  pairwise.display = "s",
+  p.adjust.method = "fdr",
+  messages = FALSE
+)
+```
+
+### Significant Test of Correlation: ggscatterstats()
+
+```{r}
+ggscatterstats(
+  data = exam,
+  x = MATHS,
+  y = ENGLISH,
+  marginal = FALSE,
+  )
+```
+
+### Significant Test of Association (Depedence) : ggbarstats() methods
+
+```{r}
+exam1 <- exam %>% 
+  mutate(MATHS_bins = 
+           cut(MATHS, 
+               breaks = c(0,60,75,85,100))
+)
+```
+
+```{r}
+ggbarstats(exam1, 
+           x = MATHS_bins, 
+           y = GENDER)
+```
+
+## Visualising Models
+
+## **Getting Started**
+
+### **Installing and loading the required libraries**
+
+```{r}
+pacman::p_load(readxl, performance, parameters, see)
+```
+
+### Importing Excel file: readxl methods
+
+```{r}
+car_resale <- read_xls("ToyotaCorolla.xls", 
+                       "data")
+car_resale
+```
+
+### Multiple Regression Model using lm()
+
+The code chunk below is used to calibrate a multiple linear regression model by using lm() of Base Stats of R.
+
+```{r}
+model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + 
+              Weight + Guarantee_Period, data = car_resale)
+model
+```
+
+### Model Diagnostic: checking for multicolinearity:
+
+```{r}
+check_collinearity(model)
+```
+
+```{r}
+check_c <- check_collinearity(model)
+plot(check_c)
+```
+
+### Model Diagnostic: checking normality assumption
+
+```{r}
+model1 <- lm(Price ~ Age_08_04 + KM + 
+              Weight + Guarantee_Period, data = car_resale)
+```
+
+```{r}
+check_n <- check_normality(model1)
+```
+
+```{r}
+plot(check_n)
+```
+
+### Model Diagnostic: Check model for homogeneity of variances
+
+```{r}
+check_h <- check_heteroscedasticity(model1)
+```
+
+```{r}
+plot(check_h)
+```
+
+### Model Diagnostic: Complete check
+
+```{r}
+check_model(model1)
+```
+
+### Visualising Regression Parameters: see methods
+
+```{r}
+plot(parameters(model1))
+```
+
+### Visualising Regression Parameters: ggcoefstats() methods
+
+```{r}
+ggcoefstats(model1, 
+            output = "plot")
+```
