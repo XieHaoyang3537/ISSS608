@@ -1,0 +1,16 @@
+Version: 1.0
+ProjectId: c4822c66-4c00-4582-a58b-4bfde196e0f6
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: pdfLaTeX
+
+ProjectName: ISSS608-XieHaoyang
