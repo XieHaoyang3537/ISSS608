@@ -1,8 +1,0 @@
----
-title: "In-class exercise 03"
-format: html
----
-
-Tableau Public link: **https://public.tableau.com/app/profile/haoyang.xie/vizzes**
-
-![](images/a4ffebe895858194cf72766d6f782cf5.png)
