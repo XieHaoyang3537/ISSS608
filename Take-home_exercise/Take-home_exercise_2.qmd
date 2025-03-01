@@ -1,0 +1,65 @@
+---
+title: "Take-home_exercise_2"
+author: "Xie Haoyang"
+date: "February 1, 2025"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# Trend analysis of Singapore's international trade since 2015
+
+## 1 Introduction
+
+### 1.1 Background
+
+123
+
+### 1.2 Objective
+
+123
+
+## 2 Data prepare
+
+### 2.1 Install and launch R packages
+
+```{r}
+pacman::p_load(readxl, tidyverse)
+```
+
+### 2.2 Data source
+
+123
+
+### 2.2.1 Importing Data
+
+```{r}
+Imports_data <- read_xlsx("data/outputFile.xlsx", sheet = "T1")
+```
+
+```{r}
+Exports_data <- read_xlsx("data/outputFile.xlsx", sheet = "T2")
+```
+
+```{r}
+Re_Exports_data <- read_xlsx("data/outputFile.xlsx", sheet = "T3")
+```
+
+### 2.2.2 Checking for duplicates
+
+```{r}
+Imports_data[duplicated(Imports_data), ]
+```
+
+```{r}
+Exports_data[duplicated(Exports_data), ]
+```
+
+```{r}
+Re_Exports_data[duplicated(Re_Exports_data), ]
+```
+
+### 2.2.3 Check missing values
