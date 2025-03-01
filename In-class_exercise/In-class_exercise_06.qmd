@@ -1,0 +1,8 @@
+---
+title: "In-class_exercise_06"
+format: html
+---
+
+Shiny link: **https://xiehaoyangxhy.shinyapps.io/In-class_exercise_06/**
+
+![](images/bfb2e7b2-a88e-49cf-8887-df7648495add.png)
