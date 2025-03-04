@@ -1,0 +1,15 @@
+{
+  "hash": "bef96e3851c91a8f139f639e9180e0d9",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Hands-on exercise 00: working with tidyverse\"\nauthor: \"XieHaoyang\"\ndata-modified: \"last-modified\"\nexecute:\n  echo: true\n  eval: true\n  warning: false\n  freeze: true\n---\n\n\n\n## Getting started\n\nLoad tidyverse onto r enviroment by using the code chunk below.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(tidyverse)\n```\n:::\n\n\n\n## Importing data\n\nCode chunk below uses read.csv() of readr to import REALIS2019.csv into r environment as a tibble data.frame.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrealis_csv <- read.csv(\"data/REALIS2019.csv\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nrealis2019 <- read.csv(\"data/REALIS2019.csv\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n#|eval: FALSE\npopdata_fat <- read.csv(\"data/PopData2019_fat.csv\")\n```\n:::\n\n\n\n## Pivoting data\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n#|eval: FALSE\npopdata_long <- popdata_fat %>%\n  pivot_longer(c(3:21),\n               names_to = \"Age Group\",\n               values_to = \"Population\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n#|eval: FALSE\nwrite_rds(popdata_long, \"rds/popdata_long.rds\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n#|eval: FALSE\npopdata_long <- read_rds(\"rds/popdata_long.rds\")\n```\n:::\n\n\n\n## \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
