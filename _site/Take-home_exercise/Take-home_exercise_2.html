@@ -282,6 +282,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#checking-for-duplicates" id="toc-checking-for-duplicates" class="nav-link" data-scroll-target="#checking-for-duplicates">2.2.2 Checking for duplicates</a></li>
   <li><a href="#check-missing-values" id="toc-check-missing-values" class="nav-link" data-scroll-target="#check-missing-values">2.2.3 Check missing values</a></li>
   </ul></li>
+  <li><a href="#evaluation-of-data-visualizations" id="toc-evaluation-of-data-visualizations" class="nav-link" data-scroll-target="#evaluation-of-data-visualizations">Evaluation of data visualizations</a>
+  <ul class="collapse">
+  <li><a href="#comments-1" id="toc-comments-1" class="nav-link" data-scroll-target="#comments-1">3.1 Comments 1</a></li>
+  <li><a href="#comments-2" id="toc-comments-2" class="nav-link" data-scroll-target="#comments-2">3.2 Comments 2</a></li>
+  <li><a href="#comments-3" id="toc-comments-3" class="nav-link" data-scroll-target="#comments-3">3.3 Comments 3</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -315,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 27, 2025</p>
+      <p class="date-modified">March 6, 2025</p>
     </div>
   </div>
     
@@ -332,27 +338,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="introduction">1 Introduction</h2>
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">1.1 Background</h3>
-<p>123</p>
+<p>In today’s globalized era, international trade is a key economic topic. Singapore, with its strong financial sector and vibrant port economy, is highly sensitive to global economic changes. As an international financial center and major transshipment hub, its prosperity is closely tied to international trade dynamics.</p>
+<p>Globalization brings both opportunities and challenges to Singapore’s trade. Fluctuations in global demand, trade policies, and technological changes impact its trade volume, composition, and direction. Understanding these trends is crucial for policymakers to develop strategies and for local businesses to make decisions.</p>
 </section>
 <section id="objective" class="level3">
 <h3 class="anchored" data-anchor-id="objective">1.2 Objective</h3>
-<p>123</p>
+<p>This study focuses on exploring and visualizing Singapore’s international trade data using R. By analyzing historical and current data, we aim to identify patterns, discover trends, analyze the future direction of trade, and suggest improvements to the data visualizations that are now available on the Singapore government website.</p>
 </section>
 </section>
 <section id="data-prepare" class="level2">
 <h2 class="anchored" data-anchor-id="data-prepare">2 Data prepare</h2>
 <section id="install-and-launch-r-packages" class="level3">
 <h3 class="anchored" data-anchor-id="install-and-launch-r-packages">2.1 Install and launch R packages</h3>
+<p>123</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readxl, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(readxl, tidyverse, lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-source" class="level3">
 <h3 class="anchored" data-anchor-id="data-source">2.2 Data source</h3>
-<p>123</p>
+<p>The data is from <em>Merchandise Trade.</em> <em>Department of Statistics Singapore, DOS,</em> which contains two datasets:</p>
+<p>1. Merchandise Trade by Region/Market</p>
+<p>2. Merchandise Trade by Commodity Section/Division</p>
+<p>Dataset 1 contains 3 tables:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table Number</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sheet 1</td>
+<td>Merchandise Trade By Region And Selected Market (Imports)</td>
+</tr>
+<tr class="even">
+<td>Sheet 2</td>
+<td>Merchandise Trade By Region And Selected Market (Domestic Exports)</td>
+</tr>
+<tr class="odd">
+<td>Sheet 3</td>
+<td>Merchandise Trade By Region And Selected Market (Re-Exports)</td>
+</tr>
+</tbody>
+</table>
+<p>Dataset 2 contains 10 tables:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table Number</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sheet 1</td>
+<td>Commodity(At Current Prices)</td>
+</tr>
+<tr class="even">
+<td>Sheet 2</td>
+<td>Commodity(At 2023 Prices)</td>
+</tr>
+<tr class="odd">
+<td>Sheet 3</td>
+<td>Merchandise Imports By Commodity Division</td>
+</tr>
+<tr class="even">
+<td>Sheet 4</td>
+<td>Merchandise Imports Of Machinery And Equipment</td>
+</tr>
+<tr class="odd">
+<td>Sheet 5</td>
+<td>Merchandise Exports By Commodity Division</td>
+</tr>
+<tr class="even">
+<td>Sheet 6</td>
+<td>Merchandise Exports Of Machinery And Equipment</td>
+</tr>
+<tr class="odd">
+<td>Sheet 7</td>
+<td>Domestic Exports By Commodity Division</td>
+</tr>
+<tr class="even">
+<td>Sheet 8</td>
+<td>Domestic Exports Of Major Non-Oil Products</td>
+</tr>
+<tr class="odd">
+<td>Sheet 9</td>
+<td>Re-Exports By Commodity Division</td>
+</tr>
+<tr class="even">
+<td>Sheet 10</td>
+<td>Re-Exports Of Machinery And Equipment</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="importing-data" class="level3">
 <h3 class="anchored" data-anchor-id="importing-data">2.2.1 Importing Data</h3>
+<p>Before importing the data, since there are some descriptive statements in the original table, copy the original table, keep one copy of these descriptions and delete the other to prevent its interference with the R recognition data, and import the table after deleting them.</p>
+<p><img src="images/536e45907ab8c8aaa27438a1a6662cf2.png" class="img-fluid"></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Imports_data <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/outputFile.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"T1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -404,9 +498,133 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #   2023 Mar &lt;dbl&gt;, 2023 Feb &lt;dbl&gt;, 2023 Jan &lt;dbl&gt;, 2022 Dec &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
+<p>The result shows no duplicate data.</p>
 </section>
 <section id="check-missing-values" class="level3">
 <h3 class="anchored" data-anchor-id="check-missing-values">2.2.3 Check missing values</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(Imports_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(Exports_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">is.na</span>(Re_Exports_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>The result shows no missing values.</p>
+</section>
+</section>
+<section id="evaluation-of-data-visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-of-data-visualizations">Evaluation of data visualizations</h2>
+<section id="comments-1" class="level3">
+<h3 class="anchored" data-anchor-id="comments-1">3.1 Comments 1</h3>
+<p><img src="images/bf8041da17c6887093dbd140929d5606.png" class="img-fluid"></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 55%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p>The contrasting colors of the different years make it easy to identify the data as belonging to different years.</p>
+<p>Similar colors are used for imports and exports in the same year, making it easy to identify data from the same year.</p></td>
+<td>The use of bar charts results in less obvious trends in the data, and exports and imports are mixed together, making it harder to see trends in the data.</td>
+</tr>
+<tr class="even">
+<td>Total trade for each year is labeled to the right of the corresponding year, facilitating direct comparisons between years.</td>
+<td>Direct display of total trade per year does not show trends in total trade.</td>
+</tr>
+</tbody>
+</table>
+<p>The improved sketch is as follows</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">The plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">The code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_exercise_2_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>convert_to_annual <span class="ot">&lt;-</span> <span class="cf">function</span>(data) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  data_row <span class="ot">&lt;-</span> data[<span class="dv">1</span>, ]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  col_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  time_col_names <span class="ot">&lt;-</span> col_names[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  years <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">" .*"</span>, <span class="st">""</span>, time_col_names))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  valid_years <span class="ot">&lt;-</span> years <span class="sc">&gt;=</span> <span class="dv">2015</span> <span class="sc">&amp;</span> years <span class="sc">&lt;=</span> <span class="dv">2024</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  valid_time_col_names <span class="ot">&lt;-</span> time_col_names[valid_years]</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  valid_data <span class="ot">&lt;-</span> data_row[ , <span class="sc">-</span><span class="dv">1</span>][valid_years]</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  data_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Year =</span> years[valid_years], <span class="at">Value =</span> <span class="fu">as.numeric</span>(valid_data))</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  annual_data <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Value <span class="sc">~</span> Year, <span class="at">data =</span> data_df, sum)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(annual_data)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>import_annual <span class="ot">&lt;-</span> <span class="fu">convert_to_annual</span>(Imports_data)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>export_annual <span class="ot">&lt;-</span> <span class="fu">convert_to_annual</span>(Exports_data)</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>re_export_annual <span class="ot">&lt;-</span> <span class="fu">convert_to_annual</span>(Re_Exports_data)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>combined_export_annual <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> export_annual<span class="sc">$</span>Year,</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value_Export =</span> export_annual<span class="sc">$</span>Value <span class="sc">+</span> re_export_annual<span class="sc">$</span>Value</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(import_annual, combined_export_annual, <span class="at">by =</span> <span class="st">"Year"</span>)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Total <span class="ot">&lt;-</span> merged_data<span class="sc">$</span>Value <span class="sc">+</span> merged_data<span class="sc">$</span>Value_Export</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged_data, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value, <span class="at">color =</span> <span class="st">"Imports"</span>)) <span class="sc">+</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value_Export, <span class="at">color =</span> <span class="st">"Exports"</span>)) <span class="sc">+</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Total, <span class="at">color =</span> <span class="st">"Total Trade"</span>)) <span class="sc">+</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value, <span class="at">label =</span> Value), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value_Export, <span class="at">label =</span> Value_Export), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Total, <span class="at">label =</span> Total), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual Imports, Exports and Total Trade Trends (2015 - 2024)"</span>,</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Value"</span>,</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Data Series"</span>) <span class="sc">+</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2015</span>, <span class="dv">2024</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="comments-2" class="level3">
+<h3 class="anchored" data-anchor-id="comments-2">3.2 Comments 2</h3>
+</section>
+<section id="comments-3" class="level3">
+<h3 class="anchored" data-anchor-id="comments-3">3.3 Comments 3</h3>
 
 
 </section>
