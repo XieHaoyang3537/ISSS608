@@ -44,41 +44,26 @@ The data is from *Merchandise Trade.* *Department of Statistics Singapore, DOS,*
 
 Dataset 1 contains 3 tables:
 
-+--------------+--------------------------------------------------------------------+
-| Table Number | Name                                                               |
-+==============+====================================================================+
-| Sheet 1      | Merchandise Trade By Region And Selected Market (Imports)          |
-+--------------+--------------------------------------------------------------------+
-| Sheet 2      | Merchandise Trade By Region And Selected Market (Domestic Exports) |
-+--------------+--------------------------------------------------------------------+
-| Sheet 3      | Merchandise Trade By Region And Selected Market (Re-Exports)       |
-+--------------+--------------------------------------------------------------------+
+| Table Number | Name |
+|----|----|
+| Sheet 1 | Merchandise Trade By Region And Selected Market (Imports) |
+| Sheet 2 | Merchandise Trade By Region And Selected Market (Domestic Exports) |
+| Sheet 3 | Merchandise Trade By Region And Selected Market (Re-Exports) |
 
 Dataset 2 contains 10 tables:
 
-+---------------+------------------------------------------------+
-| Table Number  | Name                                           |
-+===============+================================================+
-| Sheet 1       | Commodity(At Current Prices)                   |
-+---------------+------------------------------------------------+
-| Sheet 2       | Commodity(At 2023 Prices)                      |
-+---------------+------------------------------------------------+
-| Sheet 3       | Merchandise Imports By Commodity Division      |
-+---------------+------------------------------------------------+
-| Sheet 4       | Merchandise Imports Of Machinery And Equipment |
-+---------------+------------------------------------------------+
-| Sheet 5       | Merchandise Exports By Commodity Division      |
-+---------------+------------------------------------------------+
-| Sheet 6       | Merchandise Exports Of Machinery And Equipment |
-+---------------+------------------------------------------------+
-| Sheet 7       | Domestic Exports By Commodity Division         |
-+---------------+------------------------------------------------+
-| Sheet 8       | Domestic Exports Of Major Non-Oil Products     |
-+---------------+------------------------------------------------+
-| Sheet 9       | Re-Exports By Commodity Division               |
-+---------------+------------------------------------------------+
-| Sheet 10      | Re-Exports Of Machinery And Equipment          |
-+---------------+------------------------------------------------+
+| Table Number | Name                                           |
+|--------------|------------------------------------------------|
+| Sheet 1      | Commodity(At Current Prices)                   |
+| Sheet 2      | Commodity(At 2023 Prices)                      |
+| Sheet 3      | Merchandise Imports By Commodity Division      |
+| Sheet 4      | Merchandise Imports Of Machinery And Equipment |
+| Sheet 5      | Merchandise Exports By Commodity Division      |
+| Sheet 6      | Merchandise Exports Of Machinery And Equipment |
+| Sheet 7      | Domestic Exports By Commodity Division         |
+| Sheet 8      | Domestic Exports Of Major Non-Oil Products     |
+| Sheet 9      | Re-Exports By Commodity Division               |
+| Sheet 10     | Re-Exports Of Machinery And Equipment          |
 
 ### 2.2.1 Importing Data
 
@@ -186,6 +171,10 @@ merged_data <- merge(import_annual, combined_export_annual, by = "Year")
 
 merged_data$Total <- merged_data$Value + merged_data$Value_Export
 
+merged_data$Value <- merged_data$Value / 1000
+merged_data$Value_Export <- merged_data$Value_Export / 1000
+merged_data$Total <- merged_data$Total / 1000
+
 ggplot(merged_data, aes(x = Year)) +
   geom_line(aes(y = Value, color = "Imports")) +
   geom_line(aes(y = Value_Export, color = "Exports")) +
@@ -195,7 +184,7 @@ ggplot(merged_data, aes(x = Year)) +
   geom_text(aes(y = Total, label = Total), vjust = -0.5, size = 3) +
   labs(title = "Annual Imports, Exports and Total Trade Trends (2015 - 2024)",
        x = "Year",
-       y = "Value",
+       y = "Billion Dollars",
        color = "Data Series") +
   scale_x_continuous(breaks = seq(2015, 2024, 1)) +
   theme_minimal()
@@ -238,6 +227,10 @@ merged_data <- merge(import_annual, combined_export_annual, by = "Year")
 
 merged_data$Total <- merged_data$Value + merged_data$Value_Export
 
+merged_data$Value <- merged_data$Value / 1000
+merged_data$Value_Export <- merged_data$Value_Export / 1000
+merged_data$Total <- merged_data$Total / 1000
+
 ggplot(merged_data, aes(x = Year)) +
   geom_line(aes(y = Value, color = "Imports")) +
   geom_line(aes(y = Value_Export, color = "Exports")) +
@@ -247,12 +240,16 @@ ggplot(merged_data, aes(x = Year)) +
   geom_text(aes(y = Total, label = Total), vjust = -0.5, size = 3) +
   labs(title = "Annual Imports, Exports and Total Trade Trends (2015 - 2024)",
        x = "Year",
-       y = "Value",
+       y = "Billion Dollars",
        color = "Data Series") +
   scale_x_continuous(breaks = seq(2015, 2024, 1)) +
   theme_minimal()
 ```
 :::
+
+| Explanation |
+|----|
+| Replacing the bar chart in the original figure with a line chart would better represent the trend of trade volume over time. At the same time, the value of total trade is also converted into a line chart to reflect the trend, and the specific value for each year is indicated. |
 
 ### 3.2 Comments 2
 
