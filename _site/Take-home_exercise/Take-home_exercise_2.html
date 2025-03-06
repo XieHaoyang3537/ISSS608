@@ -321,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 6, 2025</p>
+      <p class="date-modified">March 7, 2025</p>
     </div>
   </div>
     
@@ -363,8 +363,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dataset 1 contains 3 tables:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 82%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -389,10 +389,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Dataset 2 contains 10 tables:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 22%">
-<col style="width: 68%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Table Number</th>
@@ -602,23 +598,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Total <span class="ot">&lt;-</span> merged_data<span class="sc">$</span>Value <span class="sc">+</span> merged_data<span class="sc">$</span>Value_Export</span>
 <span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged_data, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value, <span class="at">color =</span> <span class="st">"Imports"</span>)) <span class="sc">+</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value_Export, <span class="at">color =</span> <span class="st">"Exports"</span>)) <span class="sc">+</span></span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Total, <span class="at">color =</span> <span class="st">"Total Trade"</span>)) <span class="sc">+</span></span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value, <span class="at">label =</span> Value), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value_Export, <span class="at">label =</span> Value_Export), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Total, <span class="at">label =</span> Total), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual Imports, Exports and Total Trade Trends (2015 - 2024)"</span>,</span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Value"</span>,</span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Data Series"</span>) <span class="sc">+</span></span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2015</span>, <span class="dv">2024</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Value <span class="ot">&lt;-</span> merged_data<span class="sc">$</span>Value <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Value_Export <span class="ot">&lt;-</span> merged_data<span class="sc">$</span>Value_Export <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Total <span class="ot">&lt;-</span> merged_data<span class="sc">$</span>Total <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged_data, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value, <span class="at">color =</span> <span class="st">"Imports"</span>)) <span class="sc">+</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value_Export, <span class="at">color =</span> <span class="st">"Exports"</span>)) <span class="sc">+</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Total, <span class="at">color =</span> <span class="st">"Total Trade"</span>)) <span class="sc">+</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value, <span class="at">label =</span> Value), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Value_Export, <span class="at">label =</span> Value_Export), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> Total, <span class="at">label =</span> Total), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Annual Imports, Exports and Total Trade Trends (2015 - 2024)"</span>,</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Billion Dollars"</span>,</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Data Series"</span>) <span class="sc">+</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2015</span>, <span class="dv">2024</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Replacing the bar chart in the original figure with a line chart would better represent the trend of trade volume over time. At the same time, the value of total trade is also converted into a line chart to reflect the trend, and the specific value for each year is indicated.</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="comments-2" class="level3">
 <h3 class="anchored" data-anchor-id="comments-2">3.2 Comments 2</h3>
