@@ -16,25 +16,75 @@ execute:
 
 ### 1.1 Background
 
-123
+In today's globalized era, international trade is a key economic topic. Singapore, with its strong financial sector and vibrant port economy, is highly sensitive to global economic changes. As an international financial center and major transshipment hub, its prosperity is closely tied to international trade dynamics.
+
+Globalization brings both opportunities and challenges to Singapore's trade. Fluctuations in global demand, trade policies, and technological changes impact its trade volume, composition, and direction. Understanding these trends is crucial for policymakers to develop strategies and for local businesses to make decisions.
 
 ### 1.2 Objective
 
-123
+This study focuses on exploring and visualizing Singapore's international trade data using R. By analyzing historical and current data, we aim to identify patterns, discover trends, analyze the future direction of trade, and suggest improvements to the data visualizations that are now available on the Singapore government website.
 
 ## 2 Data prepare
 
 ### 2.1 Install and launch R packages
 
+123
+
 ```{r}
-pacman::p_load(readxl, tidyverse)
+pacman::p_load(readxl, tidyverse, lubridate)
 ```
 
 ### 2.2 Data source
 
-123
+The data is from *Merchandise Trade.* *Department of Statistics Singapore, DOS,* which contains two datasets:
+
+1\. Merchandise Trade by Region/Market
+
+2\. Merchandise Trade by Commodity Section/Division
+
+Dataset 1 contains 3 tables:
+
++--------------+--------------------------------------------------------------------+
+| Table Number | Name                                                               |
++==============+====================================================================+
+| Sheet 1      | Merchandise Trade By Region And Selected Market (Imports)          |
++--------------+--------------------------------------------------------------------+
+| Sheet 2      | Merchandise Trade By Region And Selected Market (Domestic Exports) |
++--------------+--------------------------------------------------------------------+
+| Sheet 3      | Merchandise Trade By Region And Selected Market (Re-Exports)       |
++--------------+--------------------------------------------------------------------+
+
+Dataset 2 contains 10 tables:
+
++---------------+------------------------------------------------+
+| Table Number  | Name                                           |
++===============+================================================+
+| Sheet 1       | Commodity(At Current Prices)                   |
++---------------+------------------------------------------------+
+| Sheet 2       | Commodity(At 2023 Prices)                      |
++---------------+------------------------------------------------+
+| Sheet 3       | Merchandise Imports By Commodity Division      |
++---------------+------------------------------------------------+
+| Sheet 4       | Merchandise Imports Of Machinery And Equipment |
++---------------+------------------------------------------------+
+| Sheet 5       | Merchandise Exports By Commodity Division      |
++---------------+------------------------------------------------+
+| Sheet 6       | Merchandise Exports Of Machinery And Equipment |
++---------------+------------------------------------------------+
+| Sheet 7       | Domestic Exports By Commodity Division         |
++---------------+------------------------------------------------+
+| Sheet 8       | Domestic Exports Of Major Non-Oil Products     |
++---------------+------------------------------------------------+
+| Sheet 9       | Re-Exports By Commodity Division               |
++---------------+------------------------------------------------+
+| Sheet 10      | Re-Exports Of Machinery And Equipment          |
++---------------+------------------------------------------------+
 
 ### 2.2.1 Importing Data
+
+Before importing the data, since there are some descriptive statements in the original table, copy the original table, keep one copy of these descriptions and delete the other to prevent its interference with the R recognition data, and import the table after deleting them.
+
+![](images/536e45907ab8c8aaa27438a1a6662cf2.png)
 
 ```{r}
 Imports_data <- read_xlsx("data/outputFile.xlsx", sheet = "T1")
@@ -62,4 +112,148 @@ Exports_data[duplicated(Exports_data), ]
 Re_Exports_data[duplicated(Re_Exports_data), ]
 ```
 
+The result shows no duplicate data.
+
 ### 2.2.3 Check missing values
+
+```{r}
+any(is.na(Imports_data))
+```
+
+```{r}
+any(is.na(Exports_data))
+```
+
+```{r}
+any(is.na(Re_Exports_data))
+```
+
+The result shows no missing values.
+
+## Evaluation of data visualizations
+
+### 3.1 Comments 1
+
+![](images/bf8041da17c6887093dbd140929d5606.png)
+
++-----------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Advantages                                                                                                                  | Disadvantages                                                                                                                                             |
++=============================================================================================================================+===========================================================================================================================================================+
+| The contrasting colors of the different years make it easy to identify the data as belonging to different years.            | The use of bar charts results in less obvious trends in the data, and exports and imports are mixed together, making it harder to see trends in the data. |
+|                                                                                                                             |                                                                                                                                                           |
+| Similar colors are used for imports and exports in the same year, making it easy to identify data from the same year.       |                                                                                                                                                           |
++-----------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Total trade for each year is labeled to the right of the corresponding year, facilitating direct comparisons between years. | Direct display of total trade per year does not show trends in total trade.                                                                               |
++-----------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+The improved sketch is as follows
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+convert_to_annual <- function(data) {
+  
+  data_row <- data[1, ]
+  
+  col_names <- colnames(data)
+  
+  time_col_names <- col_names[-1]
+  
+  years <- as.numeric(sub(" .*", "", time_col_names))
+  
+  valid_years <- years >= 2015 & years <= 2024
+  valid_time_col_names <- time_col_names[valid_years]
+  valid_data <- data_row[ , -1][valid_years]
+  
+  data_df <- data.frame(Year = years[valid_years], Value = as.numeric(valid_data))
+  
+  annual_data <- aggregate(Value ~ Year, data = data_df, sum)
+  
+  return(annual_data)
+}
+
+import_annual <- convert_to_annual(Imports_data)
+export_annual <- convert_to_annual(Exports_data)
+re_export_annual <- convert_to_annual(Re_Exports_data)
+
+combined_export_annual <- data.frame(
+  Year = export_annual$Year,
+  Value_Export = export_annual$Value + re_export_annual$Value
+)
+
+merged_data <- merge(import_annual, combined_export_annual, by = "Year")
+
+merged_data$Total <- merged_data$Value + merged_data$Value_Export
+
+ggplot(merged_data, aes(x = Year)) +
+  geom_line(aes(y = Value, color = "Imports")) +
+  geom_line(aes(y = Value_Export, color = "Exports")) +
+  geom_line(aes(y = Total, color = "Total Trade")) +
+  geom_text(aes(y = Value, label = Value), vjust = -0.5, size = 3) +
+  geom_text(aes(y = Value_Export, label = Value_Export), vjust = 1.5, size = 3) +
+  geom_text(aes(y = Total, label = Total), vjust = -0.5, size = 3) +
+  labs(title = "Annual Imports, Exports and Total Trade Trends (2015 - 2024)",
+       x = "Year",
+       y = "Value",
+       color = "Data Series") +
+  scale_x_continuous(breaks = seq(2015, 2024, 1)) +
+  theme_minimal()
+```
+
+## The code
+
+```{r,eval=FALSE}
+convert_to_annual <- function(data) {
+  
+  data_row <- data[1, ]
+  
+  col_names <- colnames(data)
+  
+  time_col_names <- col_names[-1]
+  
+  years <- as.numeric(sub(" .*", "", time_col_names))
+  
+  valid_years <- years >= 2015 & years <= 2024
+  valid_time_col_names <- time_col_names[valid_years]
+  valid_data <- data_row[ , -1][valid_years]
+  
+  data_df <- data.frame(Year = years[valid_years], Value = as.numeric(valid_data))
+  
+  annual_data <- aggregate(Value ~ Year, data = data_df, sum)
+  
+  return(annual_data)
+}
+
+import_annual <- convert_to_annual(Imports_data)
+export_annual <- convert_to_annual(Exports_data)
+re_export_annual <- convert_to_annual(Re_Exports_data)
+
+combined_export_annual <- data.frame(
+  Year = export_annual$Year,
+  Value_Export = export_annual$Value + re_export_annual$Value
+)
+
+merged_data <- merge(import_annual, combined_export_annual, by = "Year")
+
+merged_data$Total <- merged_data$Value + merged_data$Value_Export
+
+ggplot(merged_data, aes(x = Year)) +
+  geom_line(aes(y = Value, color = "Imports")) +
+  geom_line(aes(y = Value_Export, color = "Exports")) +
+  geom_line(aes(y = Total, color = "Total Trade")) +
+  geom_text(aes(y = Value, label = Value), vjust = -0.5, size = 3) +
+  geom_text(aes(y = Value_Export, label = Value_Export), vjust = 1.5, size = 3) +
+  geom_text(aes(y = Total, label = Total), vjust = -0.5, size = 3) +
+  labs(title = "Annual Imports, Exports and Total Trade Trends (2015 - 2024)",
+       x = "Year",
+       y = "Value",
+       color = "Data Series") +
+  scale_x_continuous(breaks = seq(2015, 2024, 1)) +
+  theme_minimal()
+```
+:::
+
+### 3.2 Comments 2
+
+### 3.3 Comments 3
