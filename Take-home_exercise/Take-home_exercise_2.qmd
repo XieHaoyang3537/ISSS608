@@ -1,5 +1,5 @@
 ---
-title: "Take-home_exercise_2"
+title: "Take-home exercise 2"
 author: "Xie Haoyang"
 date: "February 1, 2025"
 date-modified: "last-modified"
@@ -28,10 +28,32 @@ This study focuses on exploring and visualizing Singapore's international trade 
 
 ### 2.1 Install and launch R packages
 
-123
+#### **readxl**
+
+Reads Excel files (`.xls` & `.xlsx`) into R for analysis.
+
+#### **tidyverse**
+
+A collection of R packages for efficient data science workflows.
+
+#### **lubridate**
+
+Simplifies date and time data handling and calculations.
+
+#### **ggthemes**
+
+Provides predefined themes for `ggplot2` to beautify graphics.
+
+#### **forecast**
+
+Offers models and methods for time - series analysis and forecasting.
+
+#### **plotly**
+
+Creates interactive visualizations for enhanced data presentation on web.
 
 ```{r}
-pacman::p_load(readxl, tidyverse, lubridate)
+pacman::p_load(readxl, tidyverse, lubridate, ggthemes, forecast, plotly)
 ```
 
 ### 2.2 Data source
@@ -44,26 +66,41 @@ The data is from *Merchandise Trade.* *Department of Statistics Singapore, DOS,*
 
 Dataset 1 contains 3 tables:
 
-| Table Number | Name |
-|----|----|
-| Sheet 1 | Merchandise Trade By Region And Selected Market (Imports) |
-| Sheet 2 | Merchandise Trade By Region And Selected Market (Domestic Exports) |
-| Sheet 3 | Merchandise Trade By Region And Selected Market (Re-Exports) |
++--------------+--------------------------------------------------------------------+
+| Table Number | Name                                                               |
++==============+====================================================================+
+| Sheet 1      | Merchandise Trade By Region And Selected Market (Imports)          |
++--------------+--------------------------------------------------------------------+
+| Sheet 2      | Merchandise Trade By Region And Selected Market (Domestic Exports) |
++--------------+--------------------------------------------------------------------+
+| Sheet 3      | Merchandise Trade By Region And Selected Market (Re-Exports)       |
++--------------+--------------------------------------------------------------------+
 
 Dataset 2 contains 10 tables:
 
-| Table Number | Name                                           |
-|--------------|------------------------------------------------|
-| Sheet 1      | Commodity(At Current Prices)                   |
-| Sheet 2      | Commodity(At 2023 Prices)                      |
-| Sheet 3      | Merchandise Imports By Commodity Division      |
-| Sheet 4      | Merchandise Imports Of Machinery And Equipment |
-| Sheet 5      | Merchandise Exports By Commodity Division      |
-| Sheet 6      | Merchandise Exports Of Machinery And Equipment |
-| Sheet 7      | Domestic Exports By Commodity Division         |
-| Sheet 8      | Domestic Exports Of Major Non-Oil Products     |
-| Sheet 9      | Re-Exports By Commodity Division               |
-| Sheet 10     | Re-Exports Of Machinery And Equipment          |
++---------------+------------------------------------------------+
+| Table Number  | Name                                           |
++===============+================================================+
+| Sheet 1       | Commodity(At Current Prices)                   |
++---------------+------------------------------------------------+
+| Sheet 2       | Commodity(At 2023 Prices)                      |
++---------------+------------------------------------------------+
+| Sheet 3       | Merchandise Imports By Commodity Division      |
++---------------+------------------------------------------------+
+| Sheet 4       | Merchandise Imports Of Machinery And Equipment |
++---------------+------------------------------------------------+
+| Sheet 5       | Merchandise Exports By Commodity Division      |
++---------------+------------------------------------------------+
+| Sheet 6       | Merchandise Exports Of Machinery And Equipment |
++---------------+------------------------------------------------+
+| Sheet 7       | Domestic Exports By Commodity Division         |
++---------------+------------------------------------------------+
+| Sheet 8       | Domestic Exports Of Major Non-Oil Products     |
++---------------+------------------------------------------------+
+| Sheet 9       | Re-Exports By Commodity Division               |
++---------------+------------------------------------------------+
+| Sheet 10      | Re-Exports Of Machinery And Equipment          |
++---------------+------------------------------------------------+
 
 ### 2.2.1 Importing Data
 
@@ -115,21 +152,19 @@ any(is.na(Re_Exports_data))
 
 The result shows no missing values.
 
-## Evaluation of data visualizations
+## 3 Evaluation of data visualizations
 
 ### 3.1 Comments 1
 
 ![](images/bf8041da17c6887093dbd140929d5606.png)
 
-+-----------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Advantages                                                                                                                  | Disadvantages                                                                                                                                             |
-+=============================================================================================================================+===========================================================================================================================================================+
-| The contrasting colors of the different years make it easy to identify the data as belonging to different years.            | The use of bar charts results in less obvious trends in the data, and exports and imports are mixed together, making it harder to see trends in the data. |
-|                                                                                                                             |                                                                                                                                                           |
-| Similar colors are used for imports and exports in the same year, making it easy to identify data from the same year.       |                                                                                                                                                           |
-+-----------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Total trade for each year is labeled to the right of the corresponding year, facilitating direct comparisons between years. | Direct display of total trade per year does not show trends in total trade.                                                                               |
-+-----------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Advantages                                                                                                                                                                                                                                 | Disadvantages                                                                                                                                                 |
++============================================================================================================================================================================================================================================+===============================================================================================================================================================+
+| 1.  The contrasting colors of the different years make it easy to identify the data as belonging to different years. Similar colors are used for imports and exports in the same year, making it easy to identify data from the same year. | 1.  The use of bar charts results in less obvious trends in the data, and exports and imports are mixed together, making it harder to see trends in the data. |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.  Total trade for each year is labeled to the right of the corresponding year, facilitating direct comparisons between years.                                                                                                            | 2.  Direct display of total trade per year does not show trends in total trade.                                                                               |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The improved sketch is as follows
 
@@ -247,10 +282,655 @@ ggplot(merged_data, aes(x = Year)) +
 ```
 :::
 
-| Explanation |
-|----|
-| Replacing the bar chart in the original figure with a line chart would better represent the trend of trade volume over time. At the same time, the value of total trade is also converted into a line chart to reflect the trend, and the specific value for each year is indicated. |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Explanation                                                                                                                                                                                                                                                                                                  |
++==============================================================================================================================================================================================================================================================================================================+
+| Replacing the **bar chart** in the original figure with a **line chart** would better represent the **trend** of trade volume over time. At the same time, the value of **total trade** is also converted into a **line chart** to reflect the **trend**, and the specific value for each year is indicated. |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### 3.2 Comments 2
 
+![](images/ec79b9cbbf267569ec1803afc6fa407d.png)
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| Advantages                                                                                                                                                                                                                                                                                                                         | Disadvantages                                                                                                                                    |
++====================================================================================================================================================================================================================================================================================================================================+==================================================================================================================================================+
+| 1.  The use of bubble charts, combined with axes and different colored zones, enables a visual representation of the import/export relationship between Singapore and its major trading partners, as well as the size of the trade (indicated by the size of the bubbles), making it easy to quickly understand the trade pattern. | 1.  Only data for 2024 is shown, and no historical data comparisons are provided, making it difficult to see trends in trade relations and size. |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.  By dividing the chart into blue and green areas and judging trade surpluses and deficits based on the location of the center of the bubbles, this visualization is straightforward and lowers the threshold of understanding.                                                                                                  | 2.  There is no definition of the countries shown, only that they are “major trading partners”.                                                  |
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+# Data Processing Functions
+process_data <- function(df) {
+  df %>%
+    pivot_longer(-`Data Series`, names_to = "Date", values_to = "Value") %>%
+    mutate(Year = as.numeric(str_extract(Date, "\\d{4}"))) %>%
+    group_by(`Data Series`, Year) %>%
+    summarise(Total = sum(Value), .groups = "drop")
+}
+
+
+imports_processed <- process_data(Imports_data)
+exports_processed <- process_data(Exports_data)
+re_exports_processed <- process_data(Re_Exports_data)
+
+# Calculate the sum
+combined_data <- imports_processed %>%
+  full_join(exports_processed, by = c("Data Series", "Year"), suffix = c("_imports", "_exports")) %>%
+  full_join(re_exports_processed, by = c("Data Series", "Year"), suffix = c("", "_re_exports")) %>%
+  rename(Total_re_exports = Total) %>%  
+  mutate(
+    x_value = (Total_exports + Total_re_exports) / 1000,  
+    y_value = Total_imports / 1000,  
+    Total_Sum = x_value + y_value
+  ) %>%
+  filter(Year >= 2015 & Year <= 2024) %>%  
+  select(`Data Series`, Year, x_value, y_value, Total_Sum)
+
+# Exclusion of non-national names
+exclude_names <- c("Total All Markets", "America", "Asia", "Europe", "Oceania", "Africa")
+
+# Selection of the 10 highest annual values of international
+top_10_per_year <- combined_data %>%
+  filter(!`Data Series` %in% exclude_names) %>%
+  group_by(Year) %>%
+  slice_max(Total_Sum, n = 10) %>%
+  ungroup()
+
+# Add Tags
+top_10_per_year$label_text <- paste(top_10_per_year$`Data Series`, "\nTotal: ", 
+                                    round(top_10_per_year$Total_Sum, 2), "B")
+
+# Plotting
+p <- ggplot(top_10_per_year, aes(x = x_value, y = y_value, size = Total_Sum, 
+                                 label = label_text, frame = Year)) +
+  geom_point(alpha = 0.7, color = "blue") +
+  geom_text(size = 3, vjust = -0.5) +  
+  labs(x = "Exports (Billion)", y = "Imports (Billion)", 
+       title = "Top 10 Countries by Total Trade Value per Year") +
+  scale_size_continuous(range = c(3, 15)) +
+  theme_bw()
+
+# Convert to interactive plotly graphs
+ggplotly(p)
+```
+
+## The code
+
+```{r,eval=FALSE}
+# Data Processing Functions
+process_data <- function(df) {
+  df %>%
+    pivot_longer(-`Data Series`, names_to = "Date", values_to = "Value") %>%
+    mutate(Year = as.numeric(str_extract(Date, "\\d{4}"))) %>%
+    group_by(`Data Series`, Year) %>%
+    summarise(Total = sum(Value), .groups = "drop")
+}
+
+
+imports_processed <- process_data(Imports_data)
+exports_processed <- process_data(Exports_data)
+re_exports_processed <- process_data(Re_Exports_data)
+
+# Calculate the sum
+combined_data <- imports_processed %>%
+  full_join(exports_processed, by = c("Data Series", "Year"), suffix = c("_imports", "_exports")) %>%
+  full_join(re_exports_processed, by = c("Data Series", "Year"), suffix = c("", "_re_exports")) %>%
+  rename(Total_re_exports = Total) %>%  
+  mutate(
+    x_value = (Total_exports + Total_re_exports) / 1000,  
+    y_value = Total_imports / 1000,  
+    Total_Sum = x_value + y_value
+  ) %>%
+  filter(Year >= 2015 & Year <= 2024) %>%  
+  select(`Data Series`, Year, x_value, y_value, Total_Sum)
+
+# Exclusion of non-national names
+exclude_names <- c("Total All Markets", "America", "Asia", "Europe", "Oceania", "Africa")
+
+# Selection of the 10 highest annual values of international
+top_10_per_year <- combined_data %>%
+  filter(!`Data Series` %in% exclude_names) %>%
+  group_by(Year) %>%
+  slice_max(Total_Sum, n = 10) %>%
+  ungroup()
+
+# Add Tags
+top_10_per_year$label_text <- paste(top_10_per_year$`Data Series`, "\nTotal: ", 
+                                    round(top_10_per_year$Total_Sum, 2), "B")
+
+# Plotting
+p <- ggplot(top_10_per_year, aes(x = x_value, y = y_value, size = Total_Sum, 
+                                 label = label_text, frame = Year)) +
+  geom_point(alpha = 0.7, color = "blue") +
+  geom_text(size = 3, vjust = -0.5) + 
+  labs(x = "Exports (Billion)", y = "Imports (Billion)", 
+       title = "Top 10 Countries by Total Trade Value per Year") +
+  scale_size_continuous(range = c(3, 15)) +
+  theme_bw()
+
+# Convert to interactive plotly graphs
+ggplotly(p)
+```
+:::
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Explanation                                                                                                                                                                                                                                                              |
++==========================================================================================================================================================================================================================================================================+
+| **An interactive timeline** is added to the bubble chart to facilitate observations across years. Also calculated that the countries shown in the original chart are the top 10 countries in terms of total trade with Singapore, only EU is a region and not a country. |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 ### 3.3 Comments 3
+
+![](images/2469e347b7667e75c1a42845e40fa866.png)
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| Advantages                                                                                                                                            | Disadvantages                                                                                        |
++=======================================================================================================================================================+======================================================================================================+
+| 1.  Distinguish imports and exports by contrasting colors for easy identification of data.                                                            | 1.  The figure only shows data for 2024, which does not allow for trends to be represented.          |
++-------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| 2.  Each bar chart shows the name of the category, the specific value and the percentage of the total, making it easy to recognize the specific data. | 2.  The quota share of some items is already less than 1% and there is not much need to display them |
++-------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+
+In order to improve this visualization, we need to import new data, but the original data has duplicate row names like the following, which causes a lot of inconvenience after importing into R
+
+![](images/ecdffb8e5daf4010eeeb3000bc4587d1.png){width="411"}
+
+So, the data to be used will be divided into Imports and Exports and new tables T11 and T12 will be created.
+
+#### Importing Data
+
+```{r}
+No_Imports_data <- read_xlsx("data/outputFile-Commodity_SectionDivision.xlsx", sheet = "T11")
+No_Exports_data <- read_xlsx("data/outputFile-Commodity_SectionDivision.xlsx", sheet = "T12")
+```
+
+#### Checking for duplicates
+
+```{r}
+No_Imports_data[duplicated(No_Imports_data), ]
+No_Exports_data[duplicated(No_Exports_data), ]
+```
+
+#### Check missing values
+
+```{r}
+any(is.na(No_Imports_data))
+any(is.na(No_Exports_data))
+```
+
+#### Plotting
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+# Replace spaces in column names with underscores
+colnames(No_Imports_data)[1] <- "Data_Series"
+colnames(No_Exports_data)[1] <- "Data_Series"
+
+# Convert data from wide format to long format
+imports_long <- No_Imports_data %>%
+  pivot_longer(cols = -Data_Series, names_to = "Date", values_to = "Imports")
+
+exports_long <- No_Exports_data %>%
+  pivot_longer(cols = -Data_Series, names_to = "Date", values_to = "Exports")
+
+# Merging Imports and Exports data
+combined_data <- merge(imports_long, exports_long, by = c("Data_Series", "Date"))
+
+# Extract Year
+combined_data$Year <- as.numeric(substr(combined_data$Date, 1, 4))
+
+# Million to billion 
+combined_data$Imports <- combined_data$Imports / 1000
+combined_data$Exports <- combined_data$Exports / 1000
+
+# Calculate total annual value
+annual_data <- combined_data %>%
+  group_by(Data_Series, Year) %>%
+  summarise(Imports = sum(Imports), Exports = sum(Exports)) %>%
+  filter(Data_Series != "Non-Oil")
+
+# Selection of the five commodities with the highest total value per year
+top_annual_data <- annual_data %>%
+  group_by(Year) %>%
+  arrange(desc(Imports + Exports)) %>%
+  mutate(Rank = row_number()) %>%
+  mutate(Data_Series = ifelse(Rank <= 5, Data_Series, "Other")) %>%
+  group_by(Year, Data_Series) %>%
+  summarise(Imports = sum(Imports), Exports = sum(Exports))
+
+# Sort
+top_annual_data <- top_annual_data %>%
+  arrange(Year, desc(Imports + Exports))
+
+# Plotting
+p <- plot_ly(top_annual_data, x = ~Data_Series, y = ~Imports, type = "bar", name = "Imports", frame = ~Year) %>%
+  add_trace(y = ~Exports, name = "Exports") %>%
+  layout(
+    title = "Top 5 Commodities by Year (Units: Billion)",
+    xaxis = list(title = "Commodity", categoryorder = "total descending"),
+    yaxis = list(title = "Total Value (Billion)"),
+    barmode = "group",
+    showlegend = TRUE
+  ) %>%
+  animation_opts(frame = 500, transition = 300, easing = "linear", redraw = TRUE) %>%
+  animation_slider(currentvalue = list(prefix = "Year: ", font = list(color = "black")))
+
+p
+```
+
+## The code
+
+```{r,eval=FALSE}
+# Replace spaces in column names with underscores
+colnames(No_Imports_data)[1] <- "Data_Series"
+colnames(No_Exports_data)[1] <- "Data_Series"
+
+# Convert data from wide format to long format
+imports_long <- No_Imports_data %>%
+  pivot_longer(cols = -Data_Series, names_to = "Date", values_to = "Imports")
+
+exports_long <- No_Exports_data %>%
+  pivot_longer(cols = -Data_Series, names_to = "Date", values_to = "Exports")
+
+# Merging Imports and Exports data
+combined_data <- merge(imports_long, exports_long, by = c("Data_Series", "Date"))
+
+# Extract Year
+combined_data$Year <- as.numeric(substr(combined_data$Date, 1, 4))
+
+# Million to billion 
+combined_data$Imports <- combined_data$Imports / 1000
+combined_data$Exports <- combined_data$Exports / 1000
+
+# Calculate total annual value
+annual_data <- combined_data %>%
+  group_by(Data_Series, Year) %>%
+  summarise(Imports = sum(Imports), Exports = sum(Exports)) %>%
+  filter(Data_Series != "Non-Oil")
+
+# Selection of the five commodities with the highest total value per year
+top_annual_data <- annual_data %>%
+  group_by(Year) %>%
+  arrange(desc(Imports + Exports)) %>%
+  mutate(Rank = row_number()) %>%
+  mutate(Data_Series = ifelse(Rank <= 5, Data_Series, "Other")) %>%
+  group_by(Year, Data_Series) %>%
+  summarise(Imports = sum(Imports), Exports = sum(Exports))
+
+# Sort
+top_annual_data <- top_annual_data %>%
+  arrange(Year, desc(Imports + Exports))
+
+# Plotting
+p <- plot_ly(top_annual_data, x = ~Data_Series, y = ~Imports, type = "bar", name = "Imports", frame = ~Year) %>%
+  add_trace(y = ~Exports, name = "Exports") %>%
+  layout(
+    title = "Top 5 Commodities by Year (Units: Billion)",
+    xaxis = list(title = "Commodity", categoryorder = "total descending"),
+    yaxis = list(title = "Total Value (Billion)"),
+    barmode = "group",
+    showlegend = TRUE
+  ) %>%
+  animation_opts(frame = 500, transition = 300, easing = "linear", redraw = TRUE) %>%
+  animation_slider(currentvalue = list(prefix = "Year: ", font = list(color = "black")))
+
+p
+```
+:::
+
+| Explanation |
+|----|
+| Interactive year selection bars have been added to the original charts to make it easier to observe annual changes in the shares of these commodities. |
+
+## 4 Time-series analysis
+
+### 4.1 Trends in Singapore's import trade from China
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+# Filtering China's import data
+china_data <- Imports_data %>%
+  filter(`Data Series` == "China")
+
+# Extract time
+time_cols <- names(china_data)[grepl("^201[5-9]|^202[0-4]", names(china_data))]
+china_data_2015_2024 <- china_data %>%
+  select(all_of(time_cols))
+
+# Transformed format
+long_data <- china_data_2015_2024 %>%
+  pivot_longer(cols = everything(), names_to = "Date", values_to = "Value")
+
+# Extract year and month information
+long_data <- long_data %>%
+  mutate(
+    Year = as.numeric(substr(Date, 1, 4)),
+    Month = factor(substr(Date, 6, 8), levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+  )
+
+# Plotting
+ggplot(long_data, aes(x = Month, y = as.factor(Year), fill = Value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "skyblue", high = "darkblue") +
+  labs(
+    title = "Singapore's import trade from China from 2015 - 2024",
+    x = "Month",
+    y = "Year",
+    fill = "Value"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## The code
+
+```{r,eval=FALSE}
+# Filtering China's import data
+china_data <- Imports_data %>%
+  filter(`Data Series` == "China")
+
+# Extract time
+time_cols <- names(china_data)[grepl("^201[5-9]|^202[0-4]", names(china_data))]
+china_data_2015_2024 <- china_data %>%
+  select(all_of(time_cols))
+
+# Transformed format
+long_data <- china_data_2015_2024 %>%
+  pivot_longer(cols = everything(), names_to = "Date", values_to = "Value")
+
+# Extract year and month
+long_data <- long_data %>%
+  mutate(
+    Year = as.numeric(substr(Date, 1, 4)),
+    Month = factor(substr(Date, 6, 8), levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+  )
+
+# Plotting
+ggplot(long_data, aes(x = Month, y = as.factor(Year), fill = Value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "skyblue", high = "darkblue") +
+  labs(
+    title = "Singapore's import trade from China from 2015 - 2024",
+    x = "Month",
+    y = "Year",
+    fill = "Value"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+:::
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Insight                                                                                                                                                                                                                                                                                                              |
++======================================================================================================================================================================================================================================================================================================================+
+| As we can see from the Heatmap above:                                                                                                                                                                                                                                                                                |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 1.  The graph gets darker the closer it gets to **2024** and lighter the closer it gets to **2015**, indicating that Singapore's trade imports from China have been **increasing** in recent years, peaking in about **2022**.                                                                                       |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.  The color is generally lighter in **February** than in other months of the year, suggesting that there is **little demand** for imports in **February**. For enterprises, they can take advantage of this month to carry out staff training, equipment overhaul and other activities to enhance competitiveness. |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3.  **Summer** and **fall** are the **peak importing seasons** of the year, and companies can deploy additional manpower during this period to ensure the smooth flow of shipments.                                                                                                                                  |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+### 4.2 Changing trade trends in Singapore's exports
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+# Filter rows with Total All Markets
+total_data <- Exports_data %>%
+  filter(`Data Series` == "Total All Markets")
+
+# Extract time
+time_cols <- names(total_data)[grepl("^201[5-9]|^202[0-4]", names(total_data))]
+total_data_2015_2024 <- total_data %>%
+  select(all_of(time_cols))
+
+# Convert data to long format
+long_data <- total_data_2015_2024 %>%
+  pivot_longer(cols = everything(), names_to = "Date", values_to = "Value")
+
+# Extract year and month
+long_data <- long_data %>%
+  mutate(
+    Year = as.numeric(substr(Date, 1, 4)),
+    Month = factor(substr(Date, 6, 8), levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+  )
+
+# Calculate the average for each month
+avg_data <- long_data %>%
+  group_by(Month) %>%
+  summarise(avgvalue = mean(Value))
+
+# Plotting
+ggplot() + 
+  geom_line(data = long_data,
+            aes(x = Year, 
+                y = Value, 
+                group = Month), 
+            colour = "black") +
+  geom_hline(aes(yintercept = avgvalue), 
+             data = avg_data, 
+             linetype = 6, 
+             colour = "red", 
+             size = 0.5) + 
+  facet_grid(~Month) +
+  labs(axis.text.x = element_blank(),
+       title = "Exports from Total All Markets, 2015 - 2024") +
+  xlab("") +
+  ylab("Export Value") +
+  theme_tufte(base_family = "Helvetica")
+```
+
+## The code
+
+```{r,eval=FALSE}
+# Filter rows with Total All Markets
+total_data <- Exports_data %>%
+  filter(`Data Series` == "Total All Markets")
+
+# Extract time
+time_cols <- names(total_data)[grepl("^201[5-9]|^202[0-4]", names(total_data))]
+total_data_2015_2024 <- total_data %>%
+  select(all_of(time_cols))
+
+# Convert data to long format
+long_data <- total_data_2015_2024 %>%
+  pivot_longer(cols = everything(), names_to = "Date", values_to = "Value")
+
+# Extract year and month
+long_data <- long_data %>%
+  mutate(
+    Year = as.numeric(substr(Date, 1, 4)),
+    Month = factor(substr(Date, 6, 8), levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+  )
+
+# Calculate the average for each month
+avg_data <- long_data %>%
+  group_by(Month) %>%
+  summarise(avgvalue = mean(Value))
+
+# Plotting
+ggplot() + 
+  geom_line(data = long_data,
+            aes(x = Year, 
+                y = Value, 
+                group = Month), 
+            colour = "black") +
+  geom_hline(aes(yintercept = avgvalue), 
+             data = avg_data, 
+             linetype = 6, 
+             colour = "red", 
+             size = 0.5) + 
+  facet_grid(~Month) +
+  labs(axis.text.x = element_blank(),
+       title = "Exports from Total All Markets, 2015 - 2024") +
+  xlab("") +
+  ylab("Export Value") +
+  theme_tufte(base_family = "Helvetica")
+```
+:::
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Insight                                                                                                                                                                                                                                                                                                                                                   |
++===========================================================================================================================================================================================================================================================================================================================================================+
+| As we can see from the Cycle Plot above:                                                                                                                                                                                                                                                                                                                  |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 1.  **Monthly exports** have largely **increased** from **2015-2024**, but are **volatile** and **unstable**.                                                                                                                                                                                                                                             |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2.  In terms of **monthly averages**, **February**'s exports were significantly **lower** than the other months, while **March**'s were the **highest**, and the averages for the other months varied little. Enterprises can consider the allocation of manpower on a sub-consideration basis to ensure the efficient operation of the logistics system. |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+### 4.3 Forecast of Singapore Exports to China
+
+Before we start the forecast, let's look at the distribution of Singapore's exports to China from 2015 to 2024.
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+# Filter rows with China
+china_row <- Exports_data[Exports_data$`Data Series` == "China", ]
+
+# Extract columns from 2015 to 2024
+col_names <- names(china_row)
+date_cols <- col_names[grepl("^20(15|16|17|18|19|20|21|22|23|24)", col_names)]
+
+# Extract data
+china_data <- china_row[date_cols]
+
+# Plotting
+barplot(as.numeric(china_data), 
+        names.arg = date_cols,
+        main = "China Exports Data by Month (2015 Jan - 2024 Dec)",
+        xlab = "Month",
+        ylab = "Export Values",
+        col = "skyblue",
+        border = "black",
+        las = 2)
+```
+
+## The code
+
+```{r,eval=FALSE}
+# Filter rows with China
+china_row <- Exports_data[Exports_data$`Data Series` == "China", ]
+
+# Extract columns from 2015 to 2024
+col_names <- names(china_row)
+date_cols <- col_names[grepl("^20(15|16|17|18|19|20|21|22|23|24)", col_names)]
+
+# Extract data
+china_data <- china_row[date_cols]
+
+# Plotting
+barplot(as.numeric(china_data), 
+        names.arg = date_cols,
+        main = "China Exports Data by Month (2015 Jan - 2024 Dec)",
+        xlab = "Month",
+        ylab = "Export Values",
+        col = "skyblue",
+        border = "black",
+        las = 2)
+```
+:::
+
+From the above bar chart, we can see that the data fluctuates a lot, but shows a certain seasonality, so the following selection of ETS model to predict the data for 2025.
+
+::: panel-tabset
+## The plot
+
+```{r,echo=FALSE}
+# Filter rows with China
+china_row <- Exports_data[Exports_data$`Data Series` == "China", ]
+
+# Extract time
+col_names <- names(china_row)[-1]  
+china_data <- unlist(china_row[col_names])
+
+#Converting data to time series objects
+time_series <- ts(china_data, start = c(2015, 1), frequency = 12)
+
+# Fitting with the ETS model
+ets_model <- ets(time_series)
+
+# Extract data starting in 2020
+time_series_2020_onward <- window(time_series, start = c(2020, 1))
+
+# Forecast data for the next 12 months
+future_forecast <- forecast(ets_model, h = 12)
+
+# Setting the x-axis range of the plot
+xlim_values <- c(2020, 2025 + (11 / 12))
+
+# Plotting
+plot(future_forecast, 
+     main = "China Exports Forecast using ETS Model (2020 - 2025)",
+     xlab = "Year",
+     ylab = "Export Values",
+     col = "blue",
+     fcol = "lightblue",
+     xlim = xlim_values)
+```
+
+## The code
+
+```{r,eval=FALSE}
+# Filter rows with China
+china_row <- Exports_data[Exports_data$`Data Series` == "China", ]
+
+# Extract time
+col_names <- names(china_row)[-1]  
+china_data <- unlist(china_row[col_names])
+
+#Converting data to time series objects
+time_series <- ts(china_data, start = c(2015, 1), frequency = 12)
+
+# Fitting with the ETS model
+ets_model <- ets(time_series)
+
+# Extract data starting in 2020
+time_series_2020_onward <- window(time_series, start = c(2020, 1))
+
+# Forecast data for the next 12 months
+future_forecast <- forecast(ets_model, h = 12)
+
+# Setting the x-axis range of the plot
+xlim_values <- c(2020, 2025 + (11 / 12))
+
+# Plotting
+plot(future_forecast, 
+     main = "China Exports Forecast using ETS Model (2020 - 2025)",
+     xlab = "Year",
+     ylab = "Export Values",
+     col = "blue",
+     fcol = "lightblue",
+     xlim = xlim_values)
+```
+:::
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Insight                                                                                                                                                                                                                                          |
++==================================================================================================================================================================================================================================================+
+| The above **line graph** uses the **ETS model** to make predictions, and it can be seen that the data for 2025, although not particularly outstanding, will be **less volatile** than in previous years, and the overall stability is improving. |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Reference
+
+DOS. SingStat Website. Singapore International Trade
+
+<https://www.singstat.gov.sg/modules/infographics/singapore-international-trade>
+
+DOS. SingStat Website. Latest Data
+
+<https://www.singstat.gov.sg/find-data/search-by-theme/trade-and-investment/merchandise-trade/latest-data>
