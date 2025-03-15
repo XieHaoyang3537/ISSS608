@@ -1,0 +1,10 @@
+---
+title: "In-class_exercise_08"
+format: html
+---
+
+<https://public.tableau.com/app/profile/haoyang.xie/vizzes>
+
+![](images/72998dac6425b44b81a3bdaaa09b8df8.png)
+
+![](images/1742021191514.png)
