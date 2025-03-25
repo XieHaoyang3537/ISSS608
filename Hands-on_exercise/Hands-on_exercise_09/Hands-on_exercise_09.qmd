@@ -31,7 +31,7 @@ GAStech_edges <- read_csv("data/GAStech_email_edge-v2.csv")
 glimpse(GAStech_edges)
 ```
 
-### **Wrangling time **
+### **Wrangling time** 
 
 ```{r}
 GAStech_edges <- GAStech_edges %>%
