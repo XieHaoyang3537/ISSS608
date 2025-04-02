@@ -11,7 +11,7 @@ execute:
   freeze: true
 ---
 
-# Anomaly Detection and Time-Series Forcasting
+# Anomaly Detection and Time-Series Forecasting
 
 ## 1. Introduction
 
@@ -112,7 +112,7 @@ weather_active %>% ExpData(type = 2)
 write.csv(weather_active, "weather_active.csv", row.names = FALSE)
 ```
 
-## 3. Anomaly Detection and Time-Series Forcasting
+## 3. Anomaly Detection and Time-Series Forecasting
 
 ### 3.1 Data prediction to 2025
 
@@ -263,7 +263,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-#### User Guide - Anomaly Detection and Time-Series Forcasting
+#### User Guide - Anomaly Detection and Time-Series Forecasting
 
 #### 1. Time Selection
 

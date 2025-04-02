@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#anomaly-detection-and-time-series-forcasting" id="toc-anomaly-detection-and-time-series-forcasting" class="nav-link active" data-scroll-target="#anomaly-detection-and-time-series-forcasting">Anomaly Detection and Time-Series Forcasting</a>
+  <li><a href="#anomaly-detection-and-time-series-forecasting" id="toc-anomaly-detection-and-time-series-forecasting" class="nav-link active" data-scroll-target="#anomaly-detection-and-time-series-forecasting">Anomaly Detection and Time-Series Forecasting</a>
   <ul class="collapse">
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a></li>
   <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><strong>2. Data Preparation</strong></a>
@@ -330,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data"><strong>2.3 Cleaning data</strong></a></li>
   <li><a href="#save-the-merged-file-separately-for-subsequent-use" id="toc-save-the-merged-file-separately-for-subsequent-use" class="nav-link" data-scroll-target="#save-the-merged-file-separately-for-subsequent-use">2.4 Save the merged file separately for subsequent use</a></li>
   </ul></li>
-  <li><a href="#anomaly-detection-and-time-series-forcasting-1" id="toc-anomaly-detection-and-time-series-forcasting-1" class="nav-link" data-scroll-target="#anomaly-detection-and-time-series-forcasting-1">3. Anomaly Detection and Time-Series Forcasting</a>
+  <li><a href="#anomaly-detection-and-time-series-forecasting-1" id="toc-anomaly-detection-and-time-series-forecasting-1" class="nav-link" data-scroll-target="#anomaly-detection-and-time-series-forecasting-1">3. Anomaly Detection and Time-Series Forecasting</a>
   <ul class="collapse">
   <li><a href="#data-prediction-to-2025" id="toc-data-prediction-to-2025" class="nav-link" data-scroll-target="#data-prediction-to-2025">3.1 Data prediction to 2025</a></li>
   <li><a href="#function" id="toc-function" class="nav-link" data-scroll-target="#function">3.2 Function</a></li>
@@ -369,7 +369,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 31, 2025</p>
+      <p class="date-modified">April 2, 2025</p>
     </div>
   </div>
     
@@ -380,8 +380,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="anomaly-detection-and-time-series-forcasting" class="level1">
-<h1>Anomaly Detection and Time-Series Forcasting</h1>
+<section id="anomaly-detection-and-time-series-forecasting" class="level1">
+<h1>Anomaly Detection and Time-Series Forecasting</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
 <p>In the realm of urban management and disaster prevention, rainfall early - warning systems play a crucial role, especially for a city - state like Singapore. With its unique geographical location and climate characteristics, Singapore is highly susceptible to the impacts of rainfall - related hazards such as floods. This project aims to develop a rainfall early - warning system using Shiny app, which integrates multiple data - driven analytical techniques.</p>
@@ -532,8 +532,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="anomaly-detection-and-time-series-forcasting-1" class="level2">
-<h2 class="anchored" data-anchor-id="anomaly-detection-and-time-series-forcasting-1">3. Anomaly Detection and Time-Series Forcasting</h2>
+<section id="anomaly-detection-and-time-series-forecasting-1" class="level2">
+<h2 class="anchored" data-anchor-id="anomaly-detection-and-time-series-forecasting-1">3. Anomaly Detection and Time-Series Forecasting</h2>
 <section id="data-prediction-to-2025" class="level3">
 <h3 class="anchored" data-anchor-id="data-prediction-to-2025">3.1 Data prediction to 2025</h3>
 <p>To prevent R from repeatedly training the model and affecting the performance. Therefore, the SRIMA model is pre-trained on the previously saved dataset using the SRIMA model to predict the daily rainfall data for each site in 2025 to form a new dataset.</p>
@@ -588,8 +588,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-7f81a5c85e9a62728f06" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-7f81a5c85e9a62728f06">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[1.3087,1.3823,1.3191,1.2841,1.3821,1.3082,1.2923,1.4387,1.4388,1.37,1.3418,1.4067,1.305,1.295,1.3679,1.3865,1.4028,1.2937,1.3377,1.3443,1.3003,1.307,1.3417,1.3199,1.3325,1.3704,1.3214],[103.818,103.7607,103.8193,103.7888,103.7381,103.71,103.7815,103.736,103.7017,103.8271,103.8339,103.7832,103.9112,103.8622,103.9489,103.9413,103.9095,103.8127,103.8662,103.9441,103.8372,103.8907,103.8515,103.6613,103.755,103.8046,103.8577],[2.707599449157715,0.5327861309051514,2.336401748657226,0.5504716396331787,1.443010425567627,0.3474042654037476,0.8181842803955078,1.458158683776855,2.657522583007812,1.37886438369751,1.539072227478027,0.336792516708374,0.1499993562698364,0.6397592544555664,8,0.8084030151367188,2.879583740234375,1.719748306274414,-0.039101699,1.346041774749756,0.7693535804748535,0.1613690376281738,2.553812408447266,0.4415067672729492,-0.5322217464000001,0.4673266887664795,8],null,null,{"interactive":true,"className":"","stroke":true,"color":["blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red"],"fillOpacity":0.7},null,null,["Station: Botanic Garden<br>Rainfall: 13.5379972457886 mm","Station: Bukit Panjang<br>Rainfall: 2.66393065452576 mm","Station: Bukit Timah<br>Rainfall: 11.6820087432861 mm","Station: Buona Vista<br>Rainfall: 2.75235819816589 mm","Station: Choa Chu Kang Central<br>Rainfall: 7.21505212783813 mm","Station: Jurong Pier<br>Rainfall: 1.73702132701874 mm","Station: Kent Ridge<br>Rainfall: 4.09092140197754 mm","Station: Kranji Reservoir<br>Rainfall: 7.29079341888428 mm","Station: Lim Chu Kang<br>Rainfall: 13.2876129150391 mm","Station: Lower Peirce Reservoir<br>Rainfall: 6.89432191848755 mm","Station: Macritchie Reservoir<br>Rainfall: 7.69536113739014 mm","Station: Mandai<br>Rainfall: 1.68396258354187 mm","Station: Marine Parade<br>Rainfall: 0.749996781349182 mm","Station: Nicoll Highway<br>Rainfall: 3.19879627227783 mm","Station: Pasir Ris Central<br>Rainfall: 20.8719520568848 mm","Station: Pasir Ris West<br>Rainfall: 4.04201507568359 mm","Station: Punggol<br>Rainfall: 14.3979187011719 mm","Station: Queenstown<br>Rainfall: 8.59874153137207 mm","Station: Serangoon<br>Rainfall: -0.195508495 mm","Station: Simei<br>Rainfall: 6.73020887374878 mm","Station: Somerset Road<br>Rainfall: 3.84676790237427 mm","Station: Tanjong Katong<br>Rainfall: 0.806845188140869 mm","Station: Toa Payoh<br>Rainfall: 12.7690620422363 mm","Station: Tuas<br>Rainfall: 2.20753383636475 mm","Station: Ulu Pandan<br>Rainfall: -2.661108732 mm","Station: Upper Peirce Reservoir<br>Rainfall: 2.3366334438324 mm","Station: Whampoa<br>Rainfall: 20.9739379882812 mm"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[1.2841,1.4388],"lng":[103.6613,103.9489]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-d543f2839a0f215391ed" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d543f2839a0f215391ed">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[1.3087,1.3823,1.3191,1.2841,1.3821,1.3082,1.2923,1.4387,1.4388,1.37,1.3418,1.4067,1.305,1.295,1.3679,1.3865,1.4028,1.2937,1.3377,1.3443,1.3003,1.307,1.3417,1.3199,1.3325,1.3704,1.3214],[103.818,103.7607,103.8193,103.7888,103.7381,103.71,103.7815,103.736,103.7017,103.8271,103.8339,103.7832,103.9112,103.8622,103.9489,103.9413,103.9095,103.8127,103.8662,103.9441,103.8372,103.8907,103.8515,103.6613,103.755,103.8046,103.8577],[2.707599449157715,0.5327861309051514,2.336401748657226,0.5504716396331787,1.443010425567627,0.3474042654037476,0.8181842803955078,1.458158683776855,2.657522583007812,1.37886438369751,1.539072227478027,0.336792516708374,0.1499993562698364,0.6397592544555664,8,0.8084030151367188,2.879583740234375,1.719748306274414,-0.039101699,1.346041774749756,0.7693535804748535,0.1613690376281738,2.553812408447266,0.4415067672729492,-0.5322217464000001,0.4673266887664795,8],null,null,{"interactive":true,"className":"","stroke":true,"color":["blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","blue","red"],"fillOpacity":0.7},null,null,["Station: Botanic Garden<br>Rainfall: 13.5379972457886 mm","Station: Bukit Panjang<br>Rainfall: 2.66393065452576 mm","Station: Bukit Timah<br>Rainfall: 11.6820087432861 mm","Station: Buona Vista<br>Rainfall: 2.75235819816589 mm","Station: Choa Chu Kang Central<br>Rainfall: 7.21505212783813 mm","Station: Jurong Pier<br>Rainfall: 1.73702132701874 mm","Station: Kent Ridge<br>Rainfall: 4.09092140197754 mm","Station: Kranji Reservoir<br>Rainfall: 7.29079341888428 mm","Station: Lim Chu Kang<br>Rainfall: 13.2876129150391 mm","Station: Lower Peirce Reservoir<br>Rainfall: 6.89432191848755 mm","Station: Macritchie Reservoir<br>Rainfall: 7.69536113739014 mm","Station: Mandai<br>Rainfall: 1.68396258354187 mm","Station: Marine Parade<br>Rainfall: 0.749996781349182 mm","Station: Nicoll Highway<br>Rainfall: 3.19879627227783 mm","Station: Pasir Ris Central<br>Rainfall: 20.8719520568848 mm","Station: Pasir Ris West<br>Rainfall: 4.04201507568359 mm","Station: Punggol<br>Rainfall: 14.3979187011719 mm","Station: Queenstown<br>Rainfall: 8.59874153137207 mm","Station: Serangoon<br>Rainfall: -0.195508495 mm","Station: Simei<br>Rainfall: 6.73020887374878 mm","Station: Somerset Road<br>Rainfall: 3.84676790237427 mm","Station: Tanjong Katong<br>Rainfall: 0.806845188140869 mm","Station: Toa Payoh<br>Rainfall: 12.7690620422363 mm","Station: Tuas<br>Rainfall: 2.20753383636475 mm","Station: Ulu Pandan<br>Rainfall: -2.661108732 mm","Station: Upper Peirce Reservoir<br>Rainfall: 2.3366334438324 mm","Station: Whampoa<br>Rainfall: 20.9739379882812 mm"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[1.2841,1.4388],"lng":[103.6613,103.9489]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>
@@ -675,8 +675,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
 </div>
-<section id="user-guide---anomaly-detection-and-time-series-forcasting" class="level4">
-<h4 class="anchored" data-anchor-id="user-guide---anomaly-detection-and-time-series-forcasting">User Guide - Anomaly Detection and Time-Series Forcasting</h4>
+<section id="user-guide---anomaly-detection-and-time-series-forecasting" class="level4">
+<h4 class="anchored" data-anchor-id="user-guide---anomaly-detection-and-time-series-forecasting">User Guide - Anomaly Detection and Time-Series Forecasting</h4>
 </section>
 <section id="time-selection" class="level4">
 <h4 class="anchored" data-anchor-id="time-selection">1. Time Selection</h4>
